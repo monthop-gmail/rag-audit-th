@@ -196,6 +196,19 @@ finding, and remediation for each control.
 4. รัน audit ครั้งแรก
 5. แก้ไข findings แล้ว audit ซ้ำ
 
+## Related Projects
+
+| Project | คำอธิบาย |
+|---------|----------|
+| [data-framework](https://github.com/monthop-gmail/data-framework) | AI Survey Steward Framework — วิเคราะห์แบบสอบถามด้วย AI อย่างมีธรรมาภิบาล พร้อม 11 Claude Code skills |
+
+ทั้งสอง repo มาจากแนวคิดเดียวกัน: **AI ต้องตรวจสอบได้ (Auditability) และทำงานภายใต้กรอบที่กำหนด (Governance)**
+
+- **rag-audit-th** → audit ตัว **ระบบ RAG** (pipeline, knowledge base, security, PDPA)
+- **data-framework** → audit ตัว **การวิเคราะห์ข้อมูล survey** (data quality, bias, persona-aware reporting)
+
+ใช้ร่วมกันได้ เช่น ระบบ RAG ที่ดึงข้อมูล survey มาตอบคำถาม — ใช้ rag-audit-th ตรวจ pipeline และใช้ data-framework ควบคุมคุณภาพการวิเคราะห์
+
 ## Contributing
 
 - เพิ่ม domain checklist ใหม่ใน `docs/domains/<domain>/`
