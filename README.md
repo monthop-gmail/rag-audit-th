@@ -12,8 +12,8 @@ or serve stale information is harder. This repo provides:
    ingestion pipeline, governance, security, and evaluation that apply to any domain.
 2. **Domain-specific audit checklists** — ready-to-use checklists with control IDs,
    severity levels, and pass/fail criteria. Starting with Thai Legal RAG (60+ controls).
-3. **Audit agent** (ref) — a Python CLI tool that runs runtime tests against a live
-   RAG endpoint: hallucination, prompt injection, citation accuracy, regression, and more.
+3. **Claude Code integration** — use this repo as a submodule or reference in any
+   project, then let Claude Code audit your RAG system against the framework automatically.
 
 ## Who is this for?
 
@@ -37,10 +37,6 @@ rag-th/
 │   └── domains/
 │       └── legal/
 │           └── thai-legal-rag-audit-checklist.md  # 60+ controls, TH-LRAG-*
-└── ref/                            # Original reference material
-    └── chatgpt/
-        ├── 01/                     #   source specs & checklist
-        └── 02/                     #   audit agent code (v1–v7)
 ```
 
 ## Framework Overview
@@ -98,14 +94,114 @@ control IDs, severity, requirement, check method, evidence, and pass criteria.
 | Metadata completeness | > 90% |
 | PII detection rate | < 0.01% |
 
+## Using with Claude Code
+
+You can use this repo as an audit reference inside any RAG project.
+Claude Code will read the framework and checklist, then audit your codebase against them.
+
+### Setup
+
+**Option A — Git submodule** (recommended for teams)
+
+```bash
+cd your-rag-project/
+git submodule add https://github.com/monthop-gmail/rag-th.git audit
+```
+
+**Option B — Clone into project**
+
+```bash
+cd your-rag-project/
+git clone https://github.com/monthop-gmail/rag-th.git audit
+```
+
+**Option C — Just reference the URL**
+
+No local copy needed. Tell Claude Code to fetch it.
+
+### Add to CLAUDE.md
+
+Add this to your project's `CLAUDE.md` so Claude Code knows about the audit framework:
+
+```markdown
+## RAG Audit
+
+This project uses the rag-th compliance framework for RAG auditing.
+
+- Framework docs: audit/docs/framework/
+- Domain checklist: audit/docs/domains/legal/thai-legal-rag-audit-checklist.md
+- When asked to audit, read the relevant checklist and score each control
+  against this project's actual implementation.
+```
+
+### Example Prompts
+
+Once set up, you can ask Claude Code directly:
+
+**Full audit**
+```
+Audit this RAG system against the Thai legal checklist.
+Read audit/docs/domains/legal/thai-legal-rag-audit-checklist.md
+and score each control against our codebase.
+```
+
+**Targeted audit**
+```
+Check our ingestion pipeline against audit/docs/framework/02-ingestion-pipeline.md.
+Do we have metadata validation, PII scanning, and structured chunking?
+```
+
+**Security review**
+```
+Review this project for RAG security threats listed in
+audit/docs/framework/04-security.md. Focus on prompt injection
+and data exfiltration risks.
+```
+
+**Gap analysis**
+```
+Compare our current implementation against the framework in audit/docs/framework/.
+List what we have, what's missing, and what needs improvement.
+```
+
+**Generate audit report**
+```
+Run a full audit using the Thai legal checklist.
+Output a YAML report with control_id, status (PASS/PARTIAL/FAIL),
+finding, and remediation for each control.
+```
+
+### What Claude Code Will Do
+
+When you run an audit prompt, Claude Code will:
+
+1. Read the relevant framework docs or domain checklist
+2. Explore your project's code, config, and documentation
+3. Map your implementation against each control
+4. Score each control as `PASS` / `PARTIAL` / `FAIL` / `N/A`
+5. Produce a structured audit report with findings and recommendations
+
+### Tips
+
+- Start with a **targeted audit** (one framework doc) before running a full checklist
+- For large projects, audit one category at a time (e.g., "audit category D: PDPA controls")
+- Ask Claude Code to output results in YAML or markdown table for easy tracking
+- Re-run after fixes to verify remediation
+
 ## Getting Started
 
 1. Read the [framework docs](docs/framework/) to understand the compliance baseline
 2. Pick or create a [domain checklist](docs/domains/)
-3. Collect evidence against each control
-4. Score each control: `PASS` / `PARTIAL` / `FAIL` / `N/A`
-5. Generate audit report using the templates provided
+3. Set up Claude Code integration (see above)
+4. Run your first audit
+5. Fix findings, re-audit, repeat
+
+## Contributing
+
+- Add new domain checklists under `docs/domains/<domain>/`
+- Improve the generic framework in `docs/framework/`
+- Share your audit experience and edge cases
 
 ## License
 
-TBD
+MIT
