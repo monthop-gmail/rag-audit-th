@@ -1,36 +1,36 @@
 # rag-th
 
-Compliance framework, audit checklist, and evaluation toolkit for
-Retrieval-Augmented Generation (RAG) systems — with Thai regulatory context (PDPA).
+Compliance framework, audit checklist และ evaluation toolkit สำหรับระบบ
+Retrieval-Augmented Generation (RAG) — รองรับบริบทกฎหมายและกฎระเบียบไทย (PDPA)
 
-## What is this?
+## นี่คืออะไร?
 
-Building a RAG system is easy. Making sure it doesn't leak data, hallucinate,
-or serve stale information is harder. This repo provides:
+การสร้างระบบ RAG ไม่ยาก แต่การทำให้มันไม่รั่วข้อมูล ไม่ hallucinate
+และไม่ตอบจากข้อมูลเก่านั้นยากกว่า repo นี้ให้:
 
-1. **Generic RAG compliance framework** — standards for knowledge-base structure,
-   ingestion pipeline, governance, security, and evaluation that apply to any domain.
-2. **Domain-specific audit checklists** — ready-to-use checklists with control IDs,
-   severity levels, and pass/fail criteria. Starting with Thai Legal RAG (60+ controls).
-3. **Claude Code integration** — use this repo as a submodule or reference in any
-   project, then let Claude Code audit your RAG system against the framework automatically.
+1. **RAG compliance framework แบบ generic** — มาตรฐานด้าน knowledge-base structure,
+   ingestion pipeline, governance, security และ evaluation ที่ใช้ได้กับทุก domain
+2. **Audit checklist เฉพาะ domain** — checklist พร้อมใช้ มี control ID, severity level
+   และเกณฑ์ pass/fail เริ่มต้นด้วย Thai Legal RAG (60+ controls)
+3. **ใช้ร่วมกับ Claude Code** — เอา repo นี้เข้าไปใน project แล้วให้ Claude Code
+   audit ระบบ RAG ตาม framework ได้อัตโนมัติ
 
-## Who is this for?
+## เหมาะกับใคร?
 
-- Teams building RAG systems who need a compliance baseline
-- Auditors evaluating RAG deployments
-- Organizations operating in Thailand (PDPA compliance)
-- Anyone who wants structured quality gates for RAG
+- ทีมที่สร้างระบบ RAG และต้องการ compliance baseline
+- Auditor ที่ตรวจสอบระบบ RAG
+- องค์กรที่ดำเนินงานในไทย (PDPA compliance)
+- ใครก็ตามที่ต้องการ quality gate สำหรับระบบ RAG
 
-## Repository Structure
+## โครงสร้าง Repository
 
 ```
 rag-th/
 ├── README.md
 ├── docs/
-│   ├── framework/                  # Generic RAG compliance specs
-│   │   ├── 01-knowledge-base.md    #   knowledge-base structure & metadata
-│   │   ├── 02-ingestion-pipeline.md#   ingestion pipeline standard
+│   ├── framework/                  # RAG compliance specs (generic)
+│   │   ├── 01-knowledge-base.md    #   โครงสร้าง knowledge-base & metadata
+│   │   ├── 02-ingestion-pipeline.md#   มาตรฐาน ingestion pipeline
 │   │   ├── 03-governance.md        #   roles, approval, change management
 │   │   ├── 04-security.md          #   threat model & mitigations
 │   │   └── 05-evaluation.md        #   benchmark & evaluation metrics
@@ -39,13 +39,13 @@ rag-th/
 │           └── thai-legal-rag-audit-checklist.md  # 60+ controls, TH-LRAG-*
 ```
 
-## Framework Overview
+## ภาพรวม Framework
 
-The generic framework covers 5 areas:
+Framework ครอบคลุม 5 ด้าน:
 
-| Area | Doc | Key Topics |
-|------|-----|------------|
-| Knowledge Base | [01-knowledge-base.md](docs/framework/01-knowledge-base.md) | folder structure, metadata schema, classification, PII scanning |
+| ด้าน | เอกสาร | หัวข้อหลัก |
+|------|--------|-----------|
+| Knowledge Base | [01-knowledge-base.md](docs/framework/01-knowledge-base.md) | โครงสร้าง folder, metadata schema, classification, PII scanning |
 | Ingestion Pipeline | [02-ingestion-pipeline.md](docs/framework/02-ingestion-pipeline.md) | parser, classifier, validator, chunker, embedding, vector DB |
 | Governance | [03-governance.md](docs/framework/03-governance.md) | roles, dataset approval, change management, model governance |
 | Security | [04-security.md](docs/framework/04-security.md) | prompt injection, retrieval poisoning, data exfiltration, access control |
@@ -55,36 +55,36 @@ The generic framework covers 5 areas:
 
 ### Thai Legal RAG
 
-The [Thai Legal RAG Audit Checklist](docs/domains/legal/thai-legal-rag-audit-checklist.md)
-provides 60+ controls across 13 categories:
+[Thai Legal RAG Audit Checklist](docs/domains/legal/thai-legal-rag-audit-checklist.md)
+มี 60+ controls แบ่งเป็น 13 หมวด:
 
-| Category | Controls | Examples |
-|----------|----------|---------|
-| A. Governance | TH-LRAG-GOV-* | use case definition, human accountability, risk classification |
-| B. Source legality | TH-LRAG-SRC-* | official source registry, provenance metadata, law status |
-| C. Legal content quality | TH-LRAG-LAW-* | citation granularity, effective date, repeal awareness |
-| D. Privacy / PDPA | TH-LRAG-PDPA-* | personal data inventory, lawful basis, retention |
+| หมวด | Controls | ตัวอย่าง |
+|------|----------|---------|
+| A. Governance | TH-LRAG-GOV-* | กำหนด use case, ผู้รับผิดชอบ, risk classification |
+| B. แหล่งที่มาของกฎหมาย | TH-LRAG-SRC-* | source registry, provenance metadata, สถานะกฎหมาย |
+| C. คุณภาพเนื้อหากฎหมาย | TH-LRAG-LAW-* | citation ระดับมาตรา, วันบังคับใช้, การยกเลิก/แก้ไข |
+| D. Privacy / PDPA | TH-LRAG-PDPA-* | บัญชีข้อมูลส่วนบุคคล, ฐานทางกฎหมาย, retention |
 | E. Security | TH-LRAG-SEC-* | authentication, authorization, encryption |
 | F. Retrieval | TH-LRAG-RET-* | chunking, metadata filtering, freshness SLA |
-| G. Generation safety | TH-LRAG-GEN-* | grounding, citation, refusal, advice limitation |
-| H. Prompt injection | TH-LRAG-RED-* | injection resistance, exfiltration resistance |
+| G. ความปลอดภัยของคำตอบ | TH-LRAG-GEN-* | grounding, citation, refusal, ข้อจำกัดคำแนะนำ |
+| H. Prompt injection | TH-LRAG-RED-* | ทนทานต่อ injection, ป้องกัน exfiltration |
 | I. Model / vendor risk | TH-LRAG-MOD-* | model inventory, third-party review |
 | J. Evaluation | TH-LRAG-EVAL-* | gold test set, retrieval metrics, pre-release gate |
 | K. Logging | TH-LRAG-LOG-* | trace logging, incident response runbook |
-| L. Operations | TH-LRAG-OPS-* | environment separation, backup, rollback |
-| M. Production gate | — | 12 mandatory checks before go-live |
+| L. Operations | TH-LRAG-OPS-* | แยก environment, backup, rollback |
+| M. Production gate | — | 12 ข้อบังคับก่อน go-live |
 
-Severity levels: CRITICAL / HIGH / MEDIUM / LOW
+ระดับความรุนแรง: CRITICAL / HIGH / MEDIUM / LOW
 
-### Adding Your Own Domain
+### เพิ่ม Domain ใหม่
 
-Create a new checklist under `docs/domains/<your-domain>/` following the same pattern:
-control IDs, severity, requirement, check method, evidence, and pass criteria.
+สร้าง checklist ใหม่ใน `docs/domains/<your-domain>/` ตามรูปแบบเดียวกัน:
+control ID, severity, requirement, วิธีตรวจ, หลักฐาน, เกณฑ์ผ่าน
 
-## Key Evaluation Targets
+## เป้าหมาย Evaluation
 
-| Metric | Target |
-|--------|--------|
+| Metric | เป้าหมาย |
+|--------|----------|
 | Recall@5 | >= 0.9 |
 | Citation accuracy | >= 95% |
 | Grounded answer rate | >= 95% |
@@ -94,34 +94,34 @@ control IDs, severity, requirement, check method, evidence, and pass criteria.
 | Metadata completeness | > 90% |
 | PII detection rate | < 0.01% |
 
-## Using with Claude Code
+## ใช้งานร่วมกับ Claude Code
 
-You can use this repo as an audit reference inside any RAG project.
-Claude Code will read the framework and checklist, then audit your codebase against them.
+เอา repo นี้เข้าไปใน project ที่ต้องการ audit แล้วให้ Claude Code
+อ่าน framework/checklist และตรวจสอบ codebase ให้อัตโนมัติ
 
-### Setup
+### ติดตั้ง
 
-**Option A — Git submodule** (recommended for teams)
+**วิธี A — Git submodule** (แนะนำสำหรับทีม)
 
 ```bash
 cd your-rag-project/
 git submodule add https://github.com/monthop-gmail/rag-th.git audit
 ```
 
-**Option B — Clone into project**
+**วิธี B — Clone เข้าไปใน project**
 
 ```bash
 cd your-rag-project/
 git clone https://github.com/monthop-gmail/rag-th.git audit
 ```
 
-**Option C — Just reference the URL**
+**วิธี C — อ้างอิง URL โดยตรง**
 
-No local copy needed. Tell Claude Code to fetch it.
+ไม่ต้อง clone สั่งให้ Claude Code fetch ได้เลย
 
-### Add to CLAUDE.md
+### เพิ่มใน CLAUDE.md
 
-Add this to your project's `CLAUDE.md` so Claude Code knows about the audit framework:
+เพิ่มส่วนนี้ใน `CLAUDE.md` ของ project เพื่อให้ Claude Code รู้จัก audit framework:
 
 ```markdown
 ## RAG Audit
@@ -134,73 +134,73 @@ This project uses the rag-th compliance framework for RAG auditing.
   against this project's actual implementation.
 ```
 
-### Example Prompts
+### ตัวอย่าง Prompt
 
-Once set up, you can ask Claude Code directly:
+เมื่อ setup เสร็จแล้ว สั่ง Claude Code ได้เลย:
 
-**Full audit**
+**Audit แบบเต็ม**
 ```
 Audit this RAG system against the Thai legal checklist.
 Read audit/docs/domains/legal/thai-legal-rag-audit-checklist.md
 and score each control against our codebase.
 ```
 
-**Targeted audit**
+**Audit เฉพาะด้าน**
 ```
 Check our ingestion pipeline against audit/docs/framework/02-ingestion-pipeline.md.
 Do we have metadata validation, PII scanning, and structured chunking?
 ```
 
-**Security review**
+**ตรวจ Security**
 ```
 Review this project for RAG security threats listed in
 audit/docs/framework/04-security.md. Focus on prompt injection
 and data exfiltration risks.
 ```
 
-**Gap analysis**
+**วิเคราะห์ช่องว่าง (Gap Analysis)**
 ```
 Compare our current implementation against the framework in audit/docs/framework/.
 List what we have, what's missing, and what needs improvement.
 ```
 
-**Generate audit report**
+**สร้าง Audit Report**
 ```
 Run a full audit using the Thai legal checklist.
 Output a YAML report with control_id, status (PASS/PARTIAL/FAIL),
 finding, and remediation for each control.
 ```
 
-### What Claude Code Will Do
+### Claude Code จะทำอะไร
 
-When you run an audit prompt, Claude Code will:
+เมื่อสั่ง audit Claude Code จะ:
 
-1. Read the relevant framework docs or domain checklist
-2. Explore your project's code, config, and documentation
-3. Map your implementation against each control
-4. Score each control as `PASS` / `PARTIAL` / `FAIL` / `N/A`
-5. Produce a structured audit report with findings and recommendations
+1. อ่าน framework docs หรือ domain checklist ที่เกี่ยวข้อง
+2. สำรวจ code, config และ documentation ของ project
+3. เทียบ implementation กับแต่ละ control
+4. ให้คะแนนแต่ละ control เป็น `PASS` / `PARTIAL` / `FAIL` / `N/A`
+5. สร้าง audit report พร้อม findings และข้อแนะนำ
 
-### Tips
+### เคล็ดลับ
 
-- Start with a **targeted audit** (one framework doc) before running a full checklist
-- For large projects, audit one category at a time (e.g., "audit category D: PDPA controls")
-- Ask Claude Code to output results in YAML or markdown table for easy tracking
-- Re-run after fixes to verify remediation
+- เริ่มจาก **audit เฉพาะด้าน** (framework doc เดียว) ก่อนยิง checklist เต็ม
+- สำหรับ project ใหญ่ audit ทีละหมวด เช่น "audit category D: PDPA controls"
+- สั่งให้ output เป็น YAML หรือ markdown table เพื่อง่ายต่อการติดตาม
+- หลังแก้ไขแล้ว audit ซ้ำเพื่อยืนยันว่า remediation ผ่าน
 
-## Getting Started
+## เริ่มต้นใช้งาน
 
-1. Read the [framework docs](docs/framework/) to understand the compliance baseline
-2. Pick or create a [domain checklist](docs/domains/)
-3. Set up Claude Code integration (see above)
-4. Run your first audit
-5. Fix findings, re-audit, repeat
+1. อ่าน [framework docs](docs/framework/) เพื่อเข้าใจ compliance baseline
+2. เลือกหรือสร้าง [domain checklist](docs/domains/)
+3. ติดตั้ง Claude Code integration (ดูด้านบน)
+4. รัน audit ครั้งแรก
+5. แก้ไข findings แล้ว audit ซ้ำ
 
 ## Contributing
 
-- Add new domain checklists under `docs/domains/<domain>/`
-- Improve the generic framework in `docs/framework/`
-- Share your audit experience and edge cases
+- เพิ่ม domain checklist ใหม่ใน `docs/domains/<domain>/`
+- ปรับปรุง generic framework ใน `docs/framework/`
+- แชร์ประสบการณ์ audit และ edge cases ที่เจอ
 
 ## License
 
